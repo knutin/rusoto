@@ -6,6 +6,7 @@ use self::ec2::Ec2Generator;
 use self::json::JsonGenerator;
 use self::query::QueryGenerator;
 use self::rest_json::RestJsonGenerator;
+use self::rest_xml::RestXmlGenerator;
 use self::error_types::{GenerateErrorTypes, JsonErrorTypes, XmlErrorTypes};
 
 mod error_types;
@@ -13,6 +14,7 @@ mod ec2;
 mod json;
 mod query;
 mod rest_json;
+mod rest_xml;
 
 pub trait GenerateProtocol {
     fn generate_methods(&self, service: &Service) -> String;
@@ -39,6 +41,7 @@ pub fn generate_source(service: &Service) -> String {
         "ec2" => generate(service, Ec2Generator, XmlErrorTypes),
         "query" => generate(service, QueryGenerator, XmlErrorTypes),
         "rest-json" => generate(service, RestJsonGenerator, JsonErrorTypes),
+        "rest-xml" => generate(service, RestXmlGenerator, XmlErrorTypes),
         protocol => panic!("Unknown protocol {}", protocol),
     }
 }
@@ -100,15 +103,23 @@ where P: GenerateProtocol {
         ",
         methods = protocol_generator.generate_methods(service),
         service_name = match &service.metadata.service_abbreviation {
-            &Some(ref service_abbreviation) => service_abbreviation.as_str(),
-            &None => service.metadata.service_full_name.as_ref()
+        &Some(ref service_abbreviation) => service_abbreviation.as_str(),
+        &None => service.metadata.service_full_name.as_ref()
         },
         type_name = service.client_type_name(),
     )
 }
 
 fn generate_list(name: &str, shape: &Shape) -> String {
-    format!("pub type {} = Vec<{}>;", name, capitalize_first(shape.member().to_string()))
+
+    let mut type_name = capitalize_first(shape.member().to_string());
+
+    //TODO: not this
+    if type_name == "Error" {
+        type_name = "S3Error".to_owned();
+    }
+
+    format!("pub type {} = Vec<{}>;", name, type_name)
 }
 
 fn generate_map(name: &str, shape: &Shape) -> String {
@@ -139,7 +150,12 @@ fn generate_primitive_type(name: &str, shape_type: &str, for_timestamps: &str) -
 fn generate_types<P>(service: &Service, protocol_generator: &P) -> String
 where P: GenerateProtocol {
     service.shapes.iter().filter_map(|(name, shape)| {
-        let type_name = &capitalize_first(name.to_string());
+        let mut type_name = capitalize_first(name.to_string());
+
+        //TODO: not this
+        if type_name == "Error" {
+            type_name = "S3Error".to_owned();
+        }
 
         if type_name == "String" {
             return protocol_generator.generate_support_types(&type_name, shape, &service);
@@ -156,13 +172,13 @@ where P: GenerateProtocol {
         }
 
         match &shape.shape_type[..] {
-            "structure" => parts.push(generate_struct(service, type_name, shape, protocol_generator)),
-            "map" => parts.push(generate_map(type_name, shape)),
-            "list" => parts.push(generate_list(type_name, shape)),
-            shape_type => parts.push(generate_primitive_type(type_name, shape_type, protocol_generator.timestamp_type())),
+            "structure" => parts.push(generate_struct(service, &type_name, shape, protocol_generator)),
+            "map" => parts.push(generate_map(&type_name, shape)),
+            "list" => parts.push(generate_list(&type_name, shape)),
+            shape_type => parts.push(generate_primitive_type(&type_name, shape_type, protocol_generator.timestamp_type())),
         }
 
-        if let Some(support_types) = protocol_generator.generate_support_types(type_name, shape, &service) {
+        if let Some(support_types) = protocol_generator.generate_support_types(&type_name, shape, &service) {
             parts.push(support_types);
         }
 
