@@ -26,6 +26,11 @@ impl MockRequestDispatcher {
 		self
 	}
 
+	pub fn with_header(mut self, key: String, value: String) -> MockRequestDispatcher {
+		self.mock_response.headers.insert(key, value);
+		self
+	}
+
 }
 
 impl DispatchSignedRequest for MockRequestDispatcher {

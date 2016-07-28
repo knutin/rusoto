@@ -1,7 +1,6 @@
 use inflector::Inflector;
 
 use botocore::{Member, Operation, Service, Shape};
-use std::borrow::Cow;
 use super::GenerateProtocol;
 use super::generate_field_name;
 
@@ -10,11 +9,6 @@ pub struct RestXmlGenerator;
 impl GenerateProtocol for RestXmlGenerator {
     fn generate_methods(&self, service: &Service) -> String {
         service.operations.values().map(|operation| {
-          	let default_output = match operation.output {
-    			Some(ref output) => format!("Ok({}::default())", output.shape),
-    			None => "Ok(())".to_string()
-    		};
-
             format!(
                 "{documentation}
                 #[allow(unused_variables, warnings)]
@@ -41,27 +35,19 @@ impl GenerateProtocol for RestXmlGenerator {
                     request.set_params(params);
                     request.sign(&try!(self.credentials_provider.credentials()));
 
-                    let result = try!(self.dispatcher.dispatch(&request));
+                    let response = try!(self.dispatcher.dispatch(&request));
 
-                    match result.status {{
+                    match response.status {{
                         200 => {{
-                        	if !result.body.is_empty() {{
-                            	let mut reader = EventReader::from_str(&result.body);
-                            	let mut stack = XmlResponse::new(reader.events().peekable());
-                            	stack.next();
-                            	{method_return_value}
-                            }} else {{
-                            	{default_output}
-                            }}
+                            {parse_response}
                         }},
-                        _ => Err({error_type}::from_body(&result.body))
+                        _ => Err({error_type}::from_body(&response.body))
                     }}
                 }}
                 ",
                 documentation = generate_documentation(operation),
                 http_method = &operation.http.method,
                 endpoint_prefix = &service.metadata.endpoint_prefix,
-                method_return_value = generate_method_return_value(operation),
                 method_signature = generate_method_signature(operation),
                 operation_name = &operation.name,
                 error_type = operation.error_type_name(),
@@ -69,7 +55,7 @@ impl GenerateProtocol for RestXmlGenerator {
                 serialize_input = generate_method_input_serialization(service, operation).unwrap_or("".to_string()),
                 modify_uri = generate_uri_modification(service, operation).unwrap_or("".to_string()),
                 set_headers = generate_headers(service, operation).unwrap_or("".to_string()),
-                default_output = default_output,
+                parse_response = generate_response_parser(service, operation)
             )
         }).collect::<Vec<String>>().join("\n")
     }
@@ -264,30 +250,90 @@ fn generate_payload_serialization(shape: &Shape) -> String {
 	}
 }
 
-fn generate_response_tag_name<'a>(member_name: &'a str) -> Cow<'a, str> {
-    if member_name.ends_with("Result") {
-        format!("{}Response", &member_name[..member_name.len()-6]).into()
-    } else {
-		// is botocore just flat-out wrong about this name?  are we missing something?
-    	match member_name {
-    		"ListBucketsOutput" => "ListAllMyBucketsResult".into(),
-	        _ => member_name.into()
-	    }
+fn generate_response_parser(service: &Service, operation: &Operation) -> String {
+
+    if operation.output.is_none() {
+        return "Ok(())".to_string();
     }
+
+    let output_shape = &operation.output.as_ref().unwrap().shape;
+
+    format!("
+        let mut result;
+
+
+        if response.body.is_empty() {{
+            result = {output_shape}::default();
+        }} else {{
+            let mut reader = EventReader::from_str(&response.body);
+            let mut stack = XmlResponse::new(reader.events().peekable());
+            let _start_document = stack.next();         
+            let actual_tag_name = try!(peek_at_name(&mut stack));
+            result = try!({output_shape}Deserializer::deserialize(&actual_tag_name, &mut stack));
+        }}
+
+        {parse_response_headers}
+
+        Ok(result)
+
+        ",
+        output_shape = output_shape,
+        parse_response_headers = generate_response_headers_parser(service, operation).unwrap_or("".to_string()))
 }
 
-fn generate_method_return_value(operation: &Operation) -> String {
-    if operation.output.is_some() {
-        let output_type = &operation.output.as_ref().unwrap().shape;
-        let tag_name = generate_response_tag_name(output_type);
-        format!(
-            "Ok(try!({output_type}Deserializer::deserialize(\"{tag_name}\", &mut stack)))",
-            output_type = output_type,
-            tag_name = tag_name
-        )
-    } else {
-        "Ok(())".to_owned()
+fn generate_response_headers_parser(service: &Service, operation: &Operation) -> Option<String> {
+
+    // nothing to do if there's no output type
+    if operation.output.is_none() {
+        return None;
     }
+
+    let shape = service.shapes.get(&operation.output.as_ref().unwrap().shape).unwrap();
+
+    Some(shape.members.as_ref().unwrap().iter().filter_map(|(member_name, member)| {
+        if member.location.is_none() || member.location.as_ref().unwrap() != "header" {
+            return None;
+        }
+
+        let member_shape_name = &member.shape;
+        let member_shape = service.shapes.get(member_shape_name).unwrap();
+
+        if shape.required(&member_name) {
+            Some(format!("
+                let value = response.headers.get(\"{location_name}\").as_ref().unwrap().to_owned();
+                result.{field_name} = {primitive_parser}",
+                location_name = member.location_name.as_ref().unwrap(),
+                field_name = member_name.to_snake_case(),
+                primitive_parser = generate_header_primitive_parser(&member_shape)))
+        } else {
+            Some(format!("
+                if let Some({field_name}) = response.headers.get(\"{location_name}\") {{
+                    let value = {field_name}.to_owned();
+                    result.{field_name} = Some({primitive_parser})
+                }}",
+                location_name = member.location_name.as_ref().unwrap(),
+                field_name = member_name.to_snake_case(),
+                primitive_parser = generate_header_primitive_parser(&member_shape)))
+        }
+
+
+    }).collect::<Vec<String>>().join("\n"))
+}
+
+/// Parse a primitive type from the response headers
+fn generate_header_primitive_parser(shape: &Shape) -> String {
+    let statement =  match &shape.shape_type[..] {
+        "string" | "timestamp" => "value",
+        "integer" => "i32::from_str(&value).unwrap()",
+        "long" => "i64::from_str(&value).unwrap()",
+        "double" => "f64::from_str(&value).unwrap()",
+        "float" => "f32::from_str(&value).unwrap()",
+        "boolean" => "bool::from_str(&value).unwrap()",
+        shape_type => panic!("Unknown primitive shape type: {}", shape_type),
+    };
+
+    statement.to_string()
+
 }
 
 fn generate_method_signature(operation: &Operation) -> String {
@@ -413,7 +459,18 @@ fn generate_primitive_deserializer(shape: &Shape) -> String {
 }
 
 fn generate_struct_deserializer(name: &str, shape: &Shape) -> String {
-    if shape.members.as_ref().unwrap().is_empty() {
+
+    let mut needs_xml_deserializer = false;
+
+    // don't generate an xml deserializer if we don't need to
+    for (_, member) in shape.members.as_ref().unwrap().iter() {
+        match member.location.as_ref().map(String::as_ref) {
+            Some("header") | Some("headers") => {},
+            _ => needs_xml_deserializer = true
+        }
+    }
+
+    if !needs_xml_deserializer || shape.members.as_ref().unwrap().is_empty() {
         return format!(
             "try!(start_element(tag_name, stack));
             stack.next();
