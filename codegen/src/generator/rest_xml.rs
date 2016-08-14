@@ -142,7 +142,7 @@ fn generate_documentation(operation: &Operation) -> String {
     }
 }
 
-fn generate_method__serialization(service: &Service, operation: &Operation) -> Option<String> {
+fn generate_method_input_serialization(service: &Service, operation: &Operation) -> Option<String> {
 
 	// nothing to do if there's no input type
 	if operation.input.is_none() {
