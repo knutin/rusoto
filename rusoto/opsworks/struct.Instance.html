@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Instance` struct in crate `rusoto`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Instance">
+
+    <title>rusoto::opsworks::Instance - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>rusoto</a>::<wbr><a href='index.html'>opsworks</a></p><script>window.sidebarCurrent = {name: 'Instance', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rusoto</a>::<wbr><a href='index.html'>opsworks</a>::<wbr><a class='struct' href=''>Instance</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-338859' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/opsworks.rs.html#21643-21779' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Instance {
+    pub agent_version: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub ami_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub architecture: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.Architecture.html' title='rusoto::opsworks::Architecture'>Architecture</a>&gt;,
+    pub auto_scaling_type: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.AutoScalingType.html' title='rusoto::opsworks::AutoScalingType'>AutoScalingType</a>&gt;,
+    pub availability_zone: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub block_device_mappings: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.BlockDeviceMappings.html' title='rusoto::opsworks::BlockDeviceMappings'>BlockDeviceMappings</a>&gt;,
+    pub created_at: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.DateTime.html' title='rusoto::opsworks::DateTime'>DateTime</a>&gt;,
+    pub ebs_optimized: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.Boolean.html' title='rusoto::opsworks::Boolean'>Boolean</a>&gt;,
+    pub ec_2_instance_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub ecs_cluster_arn: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub ecs_container_instance_arn: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub elastic_ip: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub hostname: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub infrastructure_class: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub install_updates_on_boot: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.Boolean.html' title='rusoto::opsworks::Boolean'>Boolean</a>&gt;,
+    pub instance_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub instance_profile_arn: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub instance_type: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub last_service_error_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub layer_ids: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.Strings.html' title='rusoto::opsworks::Strings'>Strings</a>&gt;,
+    pub os: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub platform: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub private_dns: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub private_ip: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub public_dns: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub public_ip: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub registered_by: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub reported_agent_version: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub reported_os: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../rusoto/opsworks/struct.ReportedOs.html' title='rusoto::opsworks::ReportedOs'>ReportedOs</a>&gt;,
+    pub root_device_type: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.RootDeviceType.html' title='rusoto::opsworks::RootDeviceType'>RootDeviceType</a>&gt;,
+    pub root_device_volume_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub security_group_ids: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.Strings.html' title='rusoto::opsworks::Strings'>Strings</a>&gt;,
+    pub ssh_host_dsa_key_fingerprint: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub ssh_host_rsa_key_fingerprint: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub ssh_key_name: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub stack_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub status: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub subnet_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub tenancy: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub virtualization_type: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/opsworks/type.VirtualizationType.html' title='rusoto::opsworks::VirtualizationType'>VirtualizationType</a>&gt;,
+}</pre><div class='docblock'><p>Describes an instance.</p>
+</div><h2 class='fields'>Fields</h2>
+<table><tr class='stab '>
+                             <td id='structfield.agent_version'><code>agent_version</code></td><td><div class='docblock'><p>The agent version. This parameter is set to <code>INHERIT</code> if the instance inherits the default stack setting or to a a version number for a fixed agent version.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ami_id'><code>ami_id</code></td><td><div class='docblock'><p>A custom AMI ID to be used to create the instance. For more information, see <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html">Instances</a></p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.architecture'><code>architecture</code></td><td><div class='docblock'><p>The instance architecture: "i386" or "x86_64".</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.auto_scaling_type'><code>auto_scaling_type</code></td><td><div class='docblock'><p>For load-based or time-based instances, the type.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.availability_zone'><code>availability_zone</code></td><td><div class='docblock'><p>The instance Availability Zone. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html">Regions and Endpoints</a>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.block_device_mappings'><code>block_device_mappings</code></td><td><div class='docblock'><p>An array of <code>BlockDeviceMapping</code> objects that specify the instance's block device mappings.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.created_at'><code>created_at</code></td><td><div class='docblock'><p>The time that the instance was created.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ebs_optimized'><code>ebs_optimized</code></td><td><div class='docblock'><p>Whether this is an Amazon EBS-optimized instance.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ec_2_instance_id'><code>ec_2_instance_id</code></td><td><div class='docblock'><p>The ID of the associated Amazon EC2 instance.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ecs_cluster_arn'><code>ecs_cluster_arn</code></td><td><div class='docblock'><p>For container instances, the Amazon ECS cluster's ARN.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ecs_container_instance_arn'><code>ecs_container_instance_arn</code></td><td><div class='docblock'><p>For container instances, the instance's ARN.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.elastic_ip'><code>elastic_ip</code></td><td><div class='docblock'><p>The instance <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP address </a>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.hostname'><code>hostname</code></td><td><div class='docblock'><p>The instance host name.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.infrastructure_class'><code>infrastructure_class</code></td><td><div class='docblock'><p>For registered instances, the infrastructure class: <code>ec2</code> or <code>on-premises</code>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.install_updates_on_boot'><code>install_updates_on_boot</code></td><td><div class='docblock'><p><p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. If this value is set to <code>false</code>, you must then update your instances manually by using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or by manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> <note> <p>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</p> </note></p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.instance_id'><code>instance_id</code></td><td><div class='docblock'><p>The instance ID.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.instance_profile_arn'><code>instance_profile_arn</code></td><td><div class='docblock'><p>The ARN of the instance's IAM profile. For more information about IAM ARNs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">Using Identifiers</a>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.instance_type'><code>instance_type</code></td><td><div class='docblock'><p>The instance type, such as <code>t2.micro</code>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.last_service_error_id'><code>last_service_error_id</code></td><td><div class='docblock'><p>The ID of the last service error. For more information, call <a>DescribeServiceErrors</a>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.layer_ids'><code>layer_ids</code></td><td><div class='docblock'><p>An array containing the instance layer IDs.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.os'><code>os</code></td><td><div class='docblock'><p>The instance's operating system.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.platform'><code>platform</code></td><td><div class='docblock'><p>The instance's platform.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.private_dns'><code>private_dns</code></td><td><div class='docblock'><p>The The instance's private DNS name.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.private_ip'><code>private_ip</code></td><td><div class='docblock'><p>The instance's private IP address.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.public_dns'><code>public_dns</code></td><td><div class='docblock'><p>The instance public DNS name.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.public_ip'><code>public_ip</code></td><td><div class='docblock'><p>The instance public IP address.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.registered_by'><code>registered_by</code></td><td><div class='docblock'><p>For registered instances, who performed the registration.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.reported_agent_version'><code>reported_agent_version</code></td><td><div class='docblock'><p>The instance's reported AWS OpsWorks agent version.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.reported_os'><code>reported_os</code></td><td><div class='docblock'><p>For registered instances, the reported operating system.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.root_device_type'><code>root_device_type</code></td><td><div class='docblock'><p>The instance's root device type. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device">Storage for the Root Device</a>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.root_device_volume_id'><code>root_device_volume_id</code></td><td><div class='docblock'><p>The root device volume ID.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.security_group_ids'><code>security_group_ids</code></td><td><div class='docblock'><p>An array containing the instance security group IDs.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ssh_host_dsa_key_fingerprint'><code>ssh_host_dsa_key_fingerprint</code></td><td><div class='docblock'><p>The SSH key's Deep Security Agent (DSA) fingerprint.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ssh_host_rsa_key_fingerprint'><code>ssh_host_rsa_key_fingerprint</code></td><td><div class='docblock'><p>The SSH key's RSA fingerprint.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.ssh_key_name'><code>ssh_key_name</code></td><td><div class='docblock'><p>The instance's Amazon EC2 key-pair name.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.stack_id'><code>stack_id</code></td><td><div class='docblock'><p>The stack ID.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.status'><code>status</code></td><td><div class='docblock'><p><p>The instance status:</p> <ul> <li> <code>booting</code> </li> <li> <code>connection_lost</code> </li> <li> <code>online</code> </li> <li> <code>pending</code> </li> <li> <code>rebooting</code> </li> <li> <code>requested</code> </li> <li> <code>running_setup</code> </li> <li> <code>setup_failed</code> </li> <li> <code>shutting_down</code> </li> <li> <code>start_failed</code> </li> <li> <code>stopped</code> </li> <li> <code>stopping</code> </li> <li> <code>terminated</code> </li> <li> <code>terminating</code> </li> </ul></p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.subnet_id'><code>subnet_id</code></td><td><div class='docblock'><p>The instance's subnet ID; applicable only if the stack is running in a VPC.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.tenancy'><code>tenancy</code></td><td><div class='docblock'><p>The instance's tenancy option, such as <code>dedicated</code> or <code>host</code>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.virtualization_type'><code>virtualization_type</code></td><td><div class='docblock'><p>The instance's virtualization type: <code>paravirtual</code> or <code>hvm</code>.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../rusoto/opsworks/struct.Instance.html' title='rusoto::opsworks::Instance'>Instance</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-338900' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/opsworks.rs.html#21642' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../../rusoto/opsworks/struct.Instance.html' title='rusoto::opsworks::Instance'>Instance</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-338945' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/opsworks.rs.html#21642' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../../rusoto/opsworks/struct.Instance.html' title='rusoto::opsworks::Instance'>Instance</a></code></h4>
+<div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../rusoto/opsworks/struct.Instance.html' title='rusoto::opsworks::Instance'>Instance</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-338947' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/opsworks.rs.html#21642' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../rusoto/opsworks/struct.Instance.html' title='rusoto::opsworks::Instance'>Instance</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "rusoto";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

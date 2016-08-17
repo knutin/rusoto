@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `DirectoryDescription` struct in crate `rusoto`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DirectoryDescription">
+
+    <title>rusoto::ds::DirectoryDescription - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>rusoto</a>::<wbr><a href='index.html'>ds</a></p><script>window.sidebarCurrent = {name: 'DirectoryDescription', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rusoto</a>::<wbr><a href='index.html'>ds</a>::<wbr><a class='struct' href=''>DirectoryDescription</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-108761' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/ds.rs.html#8362-8424' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct DirectoryDescription {
+    pub access_url: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.AccessUrl.html' title='rusoto::ds::AccessUrl'>AccessUrl</a>&gt;,
+    pub alias: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.AliasName.html' title='rusoto::ds::AliasName'>AliasName</a>&gt;,
+    pub connect_settings: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../rusoto/ds/struct.DirectoryConnectSettingsDescription.html' title='rusoto::ds::DirectoryConnectSettingsDescription'>DirectoryConnectSettingsDescription</a>&gt;,
+    pub description: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.Description.html' title='rusoto::ds::Description'>Description</a>&gt;,
+    pub directory_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DirectoryId.html' title='rusoto::ds::DirectoryId'>DirectoryId</a>&gt;,
+    pub dns_ip_addrs: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DnsIpAddrs.html' title='rusoto::ds::DnsIpAddrs'>DnsIpAddrs</a>&gt;,
+    pub launch_time: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.LaunchTime.html' title='rusoto::ds::LaunchTime'>LaunchTime</a>&gt;,
+    pub name: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DirectoryName.html' title='rusoto::ds::DirectoryName'>DirectoryName</a>&gt;,
+    pub radius_settings: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../rusoto/ds/struct.RadiusSettings.html' title='rusoto::ds::RadiusSettings'>RadiusSettings</a>&gt;,
+    pub radius_status: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.RadiusStatus.html' title='rusoto::ds::RadiusStatus'>RadiusStatus</a>&gt;,
+    pub short_name: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DirectoryShortName.html' title='rusoto::ds::DirectoryShortName'>DirectoryShortName</a>&gt;,
+    pub size: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DirectorySize.html' title='rusoto::ds::DirectorySize'>DirectorySize</a>&gt;,
+    pub sso_enabled: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.SsoEnabled.html' title='rusoto::ds::SsoEnabled'>SsoEnabled</a>&gt;,
+    pub stage: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DirectoryStage.html' title='rusoto::ds::DirectoryStage'>DirectoryStage</a>&gt;,
+    pub stage_last_updated_date_time: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.LastUpdatedDateTime.html' title='rusoto::ds::LastUpdatedDateTime'>LastUpdatedDateTime</a>&gt;,
+    pub stage_reason: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.StageReason.html' title='rusoto::ds::StageReason'>StageReason</a>&gt;,
+    pub type_: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../rusoto/ds/type.DirectoryType.html' title='rusoto::ds::DirectoryType'>DirectoryType</a>&gt;,
+    pub vpc_settings: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../rusoto/ds/struct.DirectoryVpcSettingsDescription.html' title='rusoto::ds::DirectoryVpcSettingsDescription'>DirectoryVpcSettingsDescription</a>&gt;,
+}</pre><div class='docblock'><p>Contains information about an AWS Directory Service directory.</p>
+</div><h2 class='fields'>Fields</h2>
+<table><tr class='stab '>
+                             <td id='structfield.access_url'><code>access_url</code></td><td><div class='docblock'><p>The access URL for the directory, such as <code>http://<![CDATA[&#x3C;]]>alias<![CDATA[&#x3E;]]>.awsapps.com</code>. If no alias has been created for the directory, <code><![CDATA[&#x3C;]]>alias<![CDATA[&#x3E;]]></code> is the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.alias'><code>alias</code></td><td><div class='docblock'><p>The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.connect_settings'><code>connect_settings</code></td><td><div class='docblock'><p>A <a>DirectoryConnectSettingsDescription</a> object that contains additional information about an AD Connector directory. This member is only present if the directory is an AD Connector directory.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.description'><code>description</code></td><td><div class='docblock'><p>The textual description for the directory.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.directory_id'><code>directory_id</code></td><td><div class='docblock'><p>The directory identifier.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.dns_ip_addrs'><code>dns_ip_addrs</code></td><td><div class='docblock'><p>The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers in the on-premises directory to which the AD Connector is connected.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.launch_time'><code>launch_time</code></td><td><div class='docblock'><p>Specifies when the directory was created.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.name'><code>name</code></td><td><div class='docblock'><p>The fully-qualified name of the directory.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.radius_settings'><code>radius_settings</code></td><td><div class='docblock'><p>A <a>RadiusSettings</a> object that contains information about the RADIUS server configured for this directory.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.radius_status'><code>radius_status</code></td><td><div class='docblock'><p>The status of the RADIUS MFA server connection.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.short_name'><code>short_name</code></td><td><div class='docblock'><p>The short name of the directory.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.size'><code>size</code></td><td><div class='docblock'><p>The directory size.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.sso_enabled'><code>sso_enabled</code></td><td><div class='docblock'><p>Indicates if single-sign on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.stage'><code>stage</code></td><td><div class='docblock'><p>The current stage of the directory.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.stage_last_updated_date_time'><code>stage_last_updated_date_time</code></td><td><div class='docblock'><p>The date and time that the stage was last updated.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.stage_reason'><code>stage_reason</code></td><td><div class='docblock'><p>Additional information about the directory stage.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.type_'><code>type_</code></td><td><div class='docblock'><p>The directory size.</p>
+</div></td></tr><tr class='stab '>
+                             <td id='structfield.vpc_settings'><code>vpc_settings</code></td><td><div class='docblock'><p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional information about a directory. This member is only present if the directory is a Simple AD or Managed AD directory.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../rusoto/ds/struct.DirectoryDescription.html' title='rusoto::ds::DirectoryDescription'>DirectoryDescription</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-108780' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/ds.rs.html#8361' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../../rusoto/ds/struct.DirectoryDescription.html' title='rusoto::ds::DirectoryDescription'>DirectoryDescription</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-108803' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/ds.rs.html#8361' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../../rusoto/ds/struct.DirectoryDescription.html' title='rusoto::ds::DirectoryDescription'>DirectoryDescription</a></code></h4>
+<div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../rusoto/ds/struct.DirectoryDescription.html' title='rusoto::ds::DirectoryDescription'>DirectoryDescription</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-108805' class='srclink' href='../../src/rusoto/home/travis/build/rusoto/rusoto/target/debug/build/rusoto-e6f97c27dbd79258/out/ds.rs.html#8361' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../rusoto/ds/struct.DirectoryDescription.html' title='rusoto::ds::DirectoryDescription'>DirectoryDescription</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "rusoto";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
