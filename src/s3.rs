@@ -3832,7 +3832,7 @@ impl ListObjectsRequestWriter {
     fn write_params(params: &mut Params, name: &str, obj: &ListObjectsRequest) {
         let mut prefix = name.to_string();
         if prefix != "" { prefix.push_str("."); }
-        BucketNameWriter::write_params(params, &(prefix.to_string() + "Bucket"), &obj.bucket);
+        //BucketNameWriter::write_params(params, &(prefix.to_string() + "Bucket"), &obj.bucket);
         if let Some(ref obj) = obj.prefix {
             PrefixWriter::write_params(params, &(prefix.to_string() + "prefix"), obj);
         }
@@ -4948,8 +4948,8 @@ impl ListObjectsOutputParser {
                 obj.is_truncated = try!(IsTruncatedParser::parse_xml("IsTruncated", stack));
                 continue;
             }
-            if current_name == "Object" {
-                obj.contents = try!(ObjectListParser::parse_xml("Object", stack));
+            if current_name == "Contents" {
+                obj.contents = try!(ObjectListParser::parse_xml("Contents", stack));
                 continue;
             }
             if current_name == "CommonPrefix" {
@@ -4958,7 +4958,7 @@ impl ListObjectsOutputParser {
             }
             break;
         }
-        try!(end_element(tag_name, stack));
+        //try!(end_element(tag_name, stack));
         Ok(obj)
     }
 }
@@ -5501,8 +5501,8 @@ struct ObjectListParser;
 impl ObjectListParser {
     fn parse_xml<T: Peek + Next>(tag_name: &str, stack: &mut T) -> Result<ObjectList, XmlParseError> {
         let mut obj = Vec::new();
-        while try!(peek_at_name(stack)) == "Object" {
-            obj.push(try!(ObjectParser::parse_xml("Object", stack)));
+        while try!(peek_at_name(stack)) == "Contents" {
+            obj.push(try!(ObjectParser::parse_xml("Contents", stack)));
         }
         Ok(obj)
     }
@@ -8474,9 +8474,15 @@ struct MarkerParser;
 impl MarkerParser {
     fn parse_xml<T: Peek + Next>(tag_name: &str, stack: &mut T) -> Result<Marker, XmlParseError> {
         try!(start_element(tag_name, stack));
-        let obj = try!(characters(stack));
-        try!(end_element(tag_name, stack));
-        Ok(obj)
+
+        match end_element(tag_name, stack) {
+            Ok(()) => Ok("".to_string()),
+            Err(_) => {
+                let obj = try!(characters(stack));
+                try!(end_element(tag_name, stack));
+                Ok(obj)
+            }
+        }
     }
 }
 /// Write `Marker` contents to a `SignedRequest`
@@ -11137,22 +11143,29 @@ impl<P, D> S3Client<P, D> where P: ProvideAwsCredentials, D: DispatchSignedReque
     /// request parameters as selection criteria to return a subset of the objects in
     /// a bucket.
     pub fn list_objects(&self, input: &ListObjectsRequest) -> Result<ListObjectsOutput, S3Error> {
-        let mut request = SignedRequest::new("GET", "s3", self.region, "/{Bucket}");
+        let mut request = SignedRequest::new("GET", "s3", self.region, "/");
         let mut params = Params::new();
-        params.put("Action", "ListObjects");
+        //params.put("Action", "ListObjects");
         ListObjectsRequestWriter::write_params(&mut params, "", input);
         request.set_params(params);
+
+        let hostname = self.hostname(Some(&input.bucket));
+        request.set_hostname(Some(hostname));
+
         let result = sign_and_execute(&self.dispatcher, &mut request, try!(self.credentials_provider.credentials()));
+        //println!("credentials {:?}", try!(self.credentials_provider.credentials()));
         let status = result.status;
+        //println!("S3 returned {:?}", status);
+        //println!("S3 returned '{}'", result.body);
         let mut reader = EventReader::from_str(&result.body);
         let mut stack = XmlResponse::new(reader.events().peekable());
         stack.next(); // xml start tag
-        stack.next();
+        //stack.next();
         match status {
             200 => {
-                Ok(try!(ListObjectsOutputParser::parse_xml("ListObjectsOutput", &mut stack)))
+                Ok(try!(ListObjectsOutputParser::parse_xml("ListBucketResult", &mut stack)))
             }
-            _ => { Err(S3Error::new("error")) }
+            _ => { Err(S3Error::new("s3 error")) }
         }
     }
     /// Set the website configuration for a bucket.

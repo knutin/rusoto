@@ -18,7 +18,8 @@ use openssl::crypto::hmac::hmac;
 use rustc_serialize::hex::ToHex;
 use time::Tm;
 use time::now_utc;
-use url::percent_encoding::{utf8_percent_encode, DEFAULT_ENCODE_SET, QUERY_ENCODE_SET};
+//use url::percent_encoding::{utf8_percent_encode, percent_encode, DEFAULT_ENCODE_SET, QUERY_ENCODE_SET};
+use url::percent_encoding::{utf8_percent_encode, percent_encode, DEFAULT_ENCODE_SET, PATH_SEGMENT_ENCODE_SET};
 
 use credential::AwsCredentials;
 use param::Params;
@@ -158,6 +159,7 @@ impl <'a> SignedRequest <'a> {
         }
 
         self.canonical_query_string = build_canonical_query_string(&self.params);
+        //println!("canonical query string: '{}'", self.canonical_query_string);
 
         let date = now_utc();
         self.remove_header("x-amz-date");
@@ -165,7 +167,10 @@ impl <'a> SignedRequest <'a> {
 
         // build the canonical request
         let signed_headers = signed_headers(&self.headers);
-        self.canonical_uri = canonical_uri(&self.path);
+        self.canonical_uri = canonical_uri(&canonical_uri(&self.path));
+
+        //println!("canonical encoded uri: '{}'", canonical_uri(&canonical_uri(&self.path)));
+
         let canonical_headers = canonical_headers(&self.headers);
 
         let canonical_request : String;
@@ -197,6 +202,7 @@ impl <'a> SignedRequest <'a> {
                 self.add_header("content-length", &format!("{}", payload.len()));
             }
         }
+        //println!("canonical request to sign: '{}'", canonical_request);
 
         self.remove_header("content-type");
         let ct = match self.content_type {
@@ -210,6 +216,7 @@ impl <'a> SignedRequest <'a> {
         let hashed_canonical_request = to_hexdigest_from_string(&canonical_request);
         let scope = format!("{}/{}/{}/aws4_request", date.strftime("%Y%m%d").unwrap(), self.region, &self.service);
         let string_to_sign = string_to_sign(date, &hashed_canonical_request, &scope);
+        //println!("string to sign: '{}'", string_to_sign);
 
         // construct the signing key and sign the string with it
         let signing_key = signing_key(creds.aws_secret_access_key(), date, &self.region.to_string(), &self.service);
@@ -294,7 +301,7 @@ fn skipped_headers(header: &str) -> bool {
 fn canonical_uri(path: &str) -> String {
     match path {
         "" => "/".to_string(),
-        _ => encode_uri(path)
+        _ => percent_encode(path.as_bytes(), DEFAULT_ENCODE_SET).collect::<String>()
     }
 }
 
@@ -313,12 +320,12 @@ fn build_canonical_query_string(params: &Params) -> String {
         output.push_str(&byte_serialize(item.1));
     }
 
-    output
+    percent_encode(output.as_bytes(), PATH_SEGMENT_ENCODE_SET).collect::<String>()
 }
 
 #[inline]
 fn encode_uri(uri: &str) -> String {
-    utf8_percent_encode(uri, QUERY_ENCODE_SET).collect::<String>()
+    percent_encode(uri.as_bytes(), PATH_SEGMENT_ENCODE_SET).collect::<String>()
 }
 
 #[inline]
