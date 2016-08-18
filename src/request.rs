@@ -2,6 +2,9 @@
 //!
 //! Wraps the Hyper library to send PUT, POST, DELETE and GET requests.
 
+
+
+
 use std::io::Read;
 use std::io::Error as IoError;
 use std::error::Error;
@@ -12,6 +15,8 @@ use hyper::Client;
 use hyper::Error as HyperError;
 use hyper::header::Headers;
 use hyper::method::Method;
+
+use flate2::read::GzDecoder;
 
 use log::LogLevel::Debug;
 
@@ -98,24 +103,33 @@ impl DispatchSignedRequest for Client {
             Some(payload_contents) => try!(self.request(hyper_method, &final_uri).headers(hyper_headers).body(payload_contents).send()),
         };
 
-        let mut body = String::new();
-        try!(hyper_response.read_to_string(&mut body));
-
-        if log_enabled!(Debug) {
-            debug!("Response body:\n{}", body);
-        }
+        let status = hyper_response.status.to_u16();
 
         let mut headers: HashMap<String, String> = HashMap::new();
-
         for header in hyper_response.headers.iter() {
             headers.insert(header.name().to_string(), header.value_string());
         }
 
+        let mut body = String::new();
+
+
+        let content_type = headers.get("Content-Type").unwrap().clone();
+        if content_type.eq("application/octet-stream") {
+            let mut decoder = try!(GzDecoder::new(hyper_response));
+            decoder.read_to_string(&mut body).expect("Could not decode gzip body");
+        } else {
+            try!(hyper_response.read_to_string(&mut body));
+        }
+
+
+        if log_enabled!(Debug) {
+            debug!("Response body:\n{:?}", body);
+        }
+
         Ok(HttpResponse {
-            status: hyper_response.status.to_u16(),
+            status: status,
             body: body,
             headers: headers
         })
-        
     }
 }
