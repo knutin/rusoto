@@ -24,8 +24,10 @@ use signature::SignedRequest;
 
 pub struct HttpResponse {
     pub status: u16,
-    pub body: String,
+    pub body: Vec<u8>,
+    //pub body: &'a [u8],
     pub headers: HashMap<String, String>
+
 }
 
 #[derive(Debug, PartialEq)]
@@ -109,21 +111,16 @@ impl DispatchSignedRequest for Client {
         for header in hyper_response.headers.iter() {
             headers.insert(header.name().to_string(), header.value_string());
         }
+        //println!("headers {:?}", headers);
 
-        let mut body = String::new();
-
+        let mut body: Vec<u8> = Vec::new();
 
         let content_type = headers.get("Content-Type").unwrap().clone();
         if content_type.eq("application/octet-stream") {
             let mut decoder = try!(GzDecoder::new(hyper_response));
-            decoder.read_to_string(&mut body).expect("Could not decode gzip body");
+            let bytes = decoder.read_to_end(&mut body).expect("Could not decode gzip body");
         } else {
-            try!(hyper_response.read_to_string(&mut body));
-        }
-
-
-        if log_enabled!(Debug) {
-            debug!("Response body:\n{:?}", body);
+            try!(hyper_response.read_to_end(&mut body));
         }
 
         Ok(HttpResponse {

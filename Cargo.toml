@@ -20,7 +20,7 @@ version = ">= 0.2.5"
 
 [dependencies]
 chrono = "0.2.21"
-hyper = "0.9.10"
+hyper = {version = "0.9.10", path = "../hyper"}
 log = "0.3.6"
 openssl = "0.7.9"
 regex = "0.1.65"

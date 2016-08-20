@@ -346,6 +346,7 @@ impl ProvideAwsCredentials for IamProvider {
             Err(_) => return Err(CredentialsError::new("Couldn't parse metadata response body.")),
             Ok(val) => json_object = val
         };
+        //println!("json object: {:?}", json_object);
 
         let access_key;
         match json_object.find("AccessKeyId") {
@@ -366,6 +367,7 @@ impl ProvideAwsCredentials for IamProvider {
         };
 
         let expiration_time = try!(expiration.parse());
+        //println!("iam expiration time: {:?}", expiration_time);
 
         let token_from_response;
         match json_object.find("Token") {
